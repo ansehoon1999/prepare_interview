@@ -42,6 +42,28 @@
 - 추상 클래스이며 메서드 구현이 거의 없음
 - 상수 정의와 추상 메서드로 이루어짐.
 - context를 직접 상속한 것은 contextwrapper이며 이를 상속한 것은 activity, service, application
+- 생성된 객체에서 어떤 일이 일어나고 있는지 알 수 있음.
+- 어플리케이션에 관련하여 시스템이 관리하고 있는 정보에 접근
+
+    - Application Context
+        - Application lifecycle에 귀속
+        - 앱이 죽기 전까지 동일한 객체 귀속
+        - 어떤 context보다 오래 유지
+
+    - Activity Context
+        - Activity LifeCycle에 귀속
+        -getContext()로 접근
+        - Activity 범위 내에서 전달
+
+### Annotation
+- 특정 클래스, 변수, 메서드 등에 붙이는 코드로 해당 타겟의 기능을 좀 더 명확히 설명함.
+- ex) @peprecated, @suppresswarning
+
+### LayoutInflator
+- xml에 저장된 자원들을 view형태로 반환
+- 자바 코드에서 view, viewgroup을 사용하거나 Adapter의 getview() 등 배경화면이 될 Layout을 만들어놓고 View 형태로 변환받아  Activity, Fragment에서 실행
+- setContentView()와 같은 원리
+
 
 
 
