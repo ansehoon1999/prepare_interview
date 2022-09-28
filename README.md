@@ -135,7 +135,27 @@
         - Acitivity component가 없는 process
         - 다음에 재실행될 때 시작 시간을 다운시키기 위해서
         - 빈번하게 방문할 경우 다시 로드해야하는데 이를 방지하기 위해 onDestroy() 이후에도 메모리 유지
-        
+
+### LiveData
+- LifeCycle 내에서 관찰할 수 있는 데이터 홀더 클라스
+- observer, lifecycleowner와 쌍으로 추가 (started와 resume일 때)
+- Observer: 매핑된 데이터의 수정에 대한 알림
+    - 장점
+        - UI 데이터 상태와 일치하는지 확인
+        - livedata는 observer 패턴에 따름, 기본 데이터가 변경될 때 구독자에게 알림, UI 업데이트
+        - 메모리 누수가 없다. LifeCycleOwner의 상태를 알고 있기에, destroy가 되면 자동으로 구독이 취소
+        - UI 상태가 활성이 아니라면 이벤트 수신 x
+        - 항상 최신의 데이터 유지
+        - 화면 회전 시 구성 변경: 최신 데이터 다시 수신
+
+- LiveData의 캡슐화
+    - 직접 필드 내부의 값을 노출시켜 변경 x -> 변경할 수 있는 함수를 만들어 노출
+        - mutableLiveData: 변경 가능한 LiveData, setValue와 postValue의 메서드를 공개로 노출
+        - setValue: LiveData를 구독하고 있는 옵저버가 있는 상태에 setValue를 통해 변경시킨다면 메인 스레드에서 바로 반영, 메인 스레드 값은 다시 dsipatch
+        - postValue: 메인스레드에서 동작(백그라운드)
+    - observerField: 라이프 사이클을 모름 vs livedata: 라이프 사이클을 알고 있음.
+
+
 
 
 
