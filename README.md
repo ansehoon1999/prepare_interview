@@ -64,7 +64,78 @@
 - 자바 코드에서 view, viewgroup을 사용하거나 Adapter의 getview() 등 배경화면이 될 Layout을 만들어놓고 View 형태로 변환받아  Activity, Fragment에서 실행
 - setContentView()와 같은 원리
 
+### Android JetPack
 
+- 앱을 구축하는데 도움이 되는 훌륭한 도구
+- 개발자들이 더욱 쉽게 높은 클라스의 앱을 구현하도록 도와주는 라이브러리 모음
+- 4 가지가 존재(Foundation, Architecture, Behavior, UI)
+    - Foundation
+        - 기본 컴포넌트
+        - Backward Compatibility, Testing, Kotlin language support
+            - App Compat: 오래된 버전(support)와 미터리얼 디자인 지원
+            - Androidx: extension을 간결하게 쓰고 직관적으로 보이게
+            - Multidex: 앱에 대한 여러 dex file 지원
+            - Test: 단위 및 런타임 UI 테스트
+    - Architecture
+        -  Robust Apps / Testable APps / Maintainable Apps
+            - Data binding: 레이아웃의 UI 요소를 앱의 데이터 소스에 선언함으로서 바인딩
+            - LifeCycle: Activity와 Fragment의 LifeCycle을 관리
+            - LiveData: 변경사항이 있으면 View에 알림
+            - Navigation: 앱 네비게이션에 필요한 모든 것을 핸들링
+            - paging: 데이터 소스에 필요에 따라 순차적 정보를 불러옴.
+            - Room: SQLite에 접근
+            - ViewModel: LifeCycle에 관련된 UI를 관리
+            - WorkManager: 백그라운드 작업 관리
+
+### onStop에서 DB 업데이트가 모두 저장?
+- 몇몇의 경우엔 onStop이 호출되지 않음.
+- 메모리 부족이나 configuraiton changed 경우 강제로 종료될 수 있음.
+- back 버튼을 누를 경우 onSaveInstanceState 호출 x
+
+### AsyncTask가 Deprecated된 이유?
+- 비동기적으로 실행될 필요가 있는 작업들을 위해 사용되는 클래스
+- 장점: 비동기 처리가 쉽고, 핸들러보다 코드가 깔끔한.
+- 단점: 재사용이 불가, 종료하지 않으면 종료 x
+    - 액티비티 종료 시점과 어싱크가 끝나는 시점이 다를 수 있으며 이는 메모리 누수를 야기함.
+    - 순차 실행으로 인한 속도 저하
+    - 프레그먼트에서 어싱크 실행시 액티비티와 fragment가 분리될 때 getContext, getActivity가 null이 될 수 있음.
+    - 예외 처리가 없음
+
+### SharedPreference
+    - 데이터를 파일로 저장
+    - key-value 형태로 원시적 데이터 형태로 저장
+    - 단수 저장 경우 사용
+
+### View
+    - 화면에 보이는 모든 것
+    - 자신이 화면 어디에 배치되어야 하는지에 대한 정보는 없음.
+    - 화면에 배치되기 위해서는 ViewGroup(Layout), View Container에 담을 필요가 있음.
+    - tools:context -> preview 기능을 도와줌.
+
+### Process LifeCycle
+- Android application은 linux 프로세스에서 실행된다.
+- 해당 코드의 요구의 일부를 실행하는 경우 응용 프록램에 대해 생성되고 더 이상 필요로 하지 않을 때까지 계속 실행
+- 가능한 오래 유지하려고 하지만, 프로세스 생성과 메모리 확보를 위해 종료시키는 경우가 있음.
+- 중요도 결정을 통해서 가장 낮은 프로세스부터 종료의 대상
+    - Foreground Process
+        - 사용자가 현재 조작하고 있는 일에 대해 필요한 process
+        - 사용자가 조작중인 Activity / BroadcastReceiver가 현재 동작 중인 상태
+        - Service에서 콜백함수 활성화
+
+    - Visible Process
+        - Foregroud component를 가지고 있지만, 사용자가 화면에서 볼 수 없는 프로세스
+        - onPause()가 호출되었지만, 여전히 화면에서 확인할 수 있는 activity ex) dialog
+    - service Process
+        - 1, 2에 포함 x
+        - 사용자가 눈으로 확인할 수 있는 어떤 요소 외에도 연결되어있지 않지만, 사용자가 하고 있는 일에 영향을 주는 것
+    - Cached Process
+        - onStop()이후에 더 이상 사용자에게 보이지 않는 Process
+        - 메모리가 부족할 경우 System이 이를 종료시킴
+    - Empty Process
+        - Acitivity component가 없는 process
+        - 다음에 재실행될 때 시작 시간을 다운시키기 위해서
+        - 빈번하게 방문할 경우 다시 로드해야하는데 이를 방지하기 위해 onDestroy() 이후에도 메모리 유지
+        
 
 
 
