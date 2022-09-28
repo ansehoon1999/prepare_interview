@@ -155,7 +155,49 @@
         - postValue: 메인스레드에서 동작(백그라운드)
     - observerField: 라이프 사이클을 모름 vs livedata: 라이프 사이클을 알고 있음.
 
+### Android Architecture
+
+- Linux Kernel: 리눅스 커널을 기반으로 구성되어 있으며 메모리 설정, 보안 설정, 네트워크 시스템 관리 담당
+- Library and Runtime: 라이브러리와 가상 머신의 역핢을 하고 모바일 데이터베이스, 그래픽 담당
+- Android Framework: 생명 주기, 환경 설정 등의 역할을 하고 대표적으로 GPS, 리소스 관리
+- Android Application: 기본적으로 제공하는 역할
+
+- Manifest: 프로그램에 필수적이며 루트 디렉토리에 선언되며 코드를 실행하기 전에 Android 시스템이 알아야하는 애플리케이션에 대한 정보를 제공
+
+### Okhttp Intercepter
+- Retrofit은 내부적으로 Okhttp라는 http라이브러리를 가지고 있다.
+- 서버와 어플리케이션 내에서 Okhttp 코어 사이에 요청/응답을 가로채는 역할.
+
+### Memory Leak and OOM
+- 메모리 누수: 앱 사용이 끝난 메모리를 반환하지 않음
+- out of memory
+    - use of static view/context/activity
+    - register and unregister listenr
+    - non-static inner class
+    - wrong us of getContext() and getApplicationContext()
 
 
+### 안드로이드 파일 형태
+
+- JAR(java archive)
+    - Java 응용 프로그램을 배포하기 위해 고안된 패키지 형식
+    - 컴파일된 Java 클래스와 Manifest와 같은 파일들을 포함
+    - zip 형태
+- AAR(Android Archive)
+    - Android 라이브러리의 프로젝트의 바이너리 배포판
+    - Java 파일들만 포함하는 것이 아닌 리소스 파일들을 포함
+- DEX(Davlik Executable)
+    - DVM을 위한 실행 파일, JVM을 위한 class 파일과 같은 역할
+    - Android SDK의 DEX 컴파일러에 의한 JVM 바이트 코드를 DVM 바이트 코드로 변환
+- APK(Android Application Package)
+    - Android 플랫폼을 배포할 수 있게 설계된 파일 형식
+    - 컴파일된 클래스를 Dex 파일 형태로 포함시키고 Android Manifest.xml 등 리소스 파일 포함.
+
+### FragmentFactory
+- Fragment를 상속받을 땐 인자가 없는 기본 생성자를 반드시 포함
+- 자기만의 라이프 사이클을 가지고 있지만 액티비티 라이프 사이클에 종속
+- 액티비티가 재설정 -> 프레그먼트 재설정
+- FragmentFactory를 사용하면 이를 해결(AndroiX부터 instantiate X)
+- Fragment에 빈 생성자가 없을 경우 특정 상호아에서 초기화 실패 -> 해결하기 위해서 FragmentFactory 만들어짐.
 
 
