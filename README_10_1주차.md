@@ -28,3 +28,4 @@
     - Fragment 객체를 관리함
     - Activity class에서 가져옴
     - Activity와 Fragment 둘다 관리
+- 
