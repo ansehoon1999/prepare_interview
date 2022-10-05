@@ -152,3 +152,25 @@
         - constructor injection: client 새성자에 주입
         - property injection: client의 public property에 주입
         - method injection: client의 method에 주입
+
+### MVC, MVP, MVVN
+- 아키텍쳐 패텬: 큰 구조로 구성되어 다른 구조를 관리
+- 디자인 패턴: 특별 유형의 문제를 해결하는 개념
+- MVC
+    - Model: 데이터 상태, 가져오기, 컨트롤러 통신, 뷰 업데이트
+    - View: UI, 유저의 동작에 따라 controll, model의 업데이트에 따라 최신화
+    - Controller: View와 Model 통신, view로 부터 요청받은 데이터를 model에서 가져온다.
+    - 장: 코드를 읽을 수 있다면 쉽게 해석, 개발기간이 짧음
+    - 단: 유닛 텟트가 어려움, 많은 코드가 작성될 수록 문제 발생, model과 view의 결합도가 높음.
+- MVP
+    - view가 수동적이며 view가 스스로 반영하지 않는다.
+    - 명령 주체인 presentor가 view에게 data를 보여주는 명령
+    - view에서 이벤트가 발생할 경우 presentor 호출
+    - 장: view와 model의 의존성이 없음, 새로운 코드를 추가하기 편함, 테스트 코드 작성 편리
+    - 단: view와 presenter 의존성이 강함.
+- MVVN
+    - view가 능동적, 스스로 viewModel 객체에 어떤 데이터가 필요한지 관찰.
+    - LiveData, Observable 핆드를 통해 관찰 필드에 변화가 생기면 즉시 view는 알림을 받고 렌더링
+    - Databinding이 필수 기술 -> viwe의 notify와 viewmodel이 viewmodel로 명령 전달하기에 독립성이 높음.
+    - 장: view에 대한 의존도가 낮다. view와 viewmodel간의 1:n 종속성
+    - 단: 유지보수가 어렵다
