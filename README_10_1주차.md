@@ -174,3 +174,96 @@
     - Databinding이 필수 기술 -> viwe의 notify와 viewmodel이 viewmodel로 명령 전달하기에 독립성이 높음.
     - 장: view에 대한 의존도가 낮다. view와 viewmodel간의 1:n 종속성
     - 단: 유지보수가 어렵다
+
+### 직렬화와 역직렬화
+- 직렬화: 메모리에 존재하는 정보를 쉽게 전송 및 전달하기 위해 byte 형태로 데이터 변환
+- 역직렬화: byte 데이터를 원래의 오브젝트로 변환
+- serializable: reflection을 사용하여 직렬화 처리 -> 이 과정에서 가비지 컬렉터의 표적
+- parcable: 개발자가 수동적으로, bundle을 통해 내부적인 데이터 전달이 용이함.
+
+### Process와 Thread
+- Process
+    - 연속적으로 실행되고 있는 프로그램
+    - 운영체제로부터 시스템 자원을 할당
+        - code: 명령어
+        - data: 초기화
+        - stack: 임시 메모리
+        - heap: 동적 활당
+- Thread
+    - process 내에서 실행되는 최소 단위
+    - 회사에서 일하는 직원같음
+        - pc register: 
+            - thread가 시작될 때 생성
+            - 생성될 대마다 생성되는 공간으로 스레드마다 하나씩 어떤 명령을 실행할지에 대한 기록
+            - 명령의 주소를 가짐
+        - stack: 임시로 할당, 지역변수, 매개변수
+        - native method stack: 기계어로 작성된 프로그램 실행
+        - method area: 처음 메모리 공간에 올릴 때 초기화되는 대상을 저장하기 위한 메모리 공간
+        - heap area: 
+            - 인스턴스 변수가 저장(new)
+            - 실행될 때마다 많은 데이터를 스택에 저장하는 것보다 효율적
+    - MultiThread: 
+        - 프로그램 흐름이 2개 이상
+        - 매우 빠른 시간을 간격으로 스위칭되기 때문에 동시 실행
+        - code, data, heap은 공유하지만 stack만 별도
+
+### Framework와 라이브러리
+- Framework: 제공받은 일정한 요소와 틀, 규칙을 가지고 무엇인가를 만드는 일
+- 라이브러리: 도구, 프로그램 개발을 위해 쓰이는 도구
+
+### JVM(Java Virtual Machine)
+- 자바 바이트 코드를 실행할 수 있는 주체
+- OS 위에서 동작하는 프로세스로 자바코드 -> 바이트 코드를 해당 운영체제가 이해할 수 있는 언어로 바꾸는 것
+- Class Loader: 컴파일하면 .class 생성 -> 운영체제로부터 할당받은 메모리 영역에 적재
+- Execution Engine: 메모리 적재 언어 ->  기계어 변경
+- Garbaged Collector: 참조를 하지 않는 객체를 탐색 후 제거
+- Runtime Data Area: JVM 메모리 영역, 실제 데이터 적재
+
+### REST(Represtational state Transfer)
+- HTTP URI을 통해 자원을 명시
+- HTTP method를 통해 자원에 대한  CRUD를 적용
+- REST API
+    - REST를 기반으로 API 구현
+    - 유지보수 재사용서이 좋음
+- RESTful
+    - 이해하기 쉽고 사용하기 쉬운 REST API 만드는 것
+
+### synchronous asyncrhonous
+- Synchronous
+    - 동시에 일어난다는 뜻
+    - 요청과 결과가 동시에 일어남
+    - 처리 단위를 동시에 맞춤
+- Asynchronous
+    - 동시에 일어나지 않음
+    - 요청과 결과가 동시에 일어나지 않음
+    - 처리 단위가 동시가 아님
+
+### Compile Time과 RunTime
+- Complile Time: 개발자가 작성한 언어 -> 기계어 코드 변환
+- Run Time: 컴파일 과정을 거처 사용자에 의해 실행
+
+### Cookie, Session, Cache
+- Cookie: 웹 사이트 접속 시 정보를 입시 파일
+- Session: 클라이언트와 서버에 네트워크 연결이 지속적으로 유지
+- 캐서: 데이터 값을 미리 복사해 임시로 저장
+
+### 교착 상태
+- 한 프로세스가 자원을 점유하고 있는데 다른 프로세스가 자원을 요구하여 무한정 기다림
+
+### OSI 7계층
+- 물리 계층: 노드 사이의 물리적으로 연결하는 신호 방식
+- 데이터 링크 계층: 물리 계층을 통해 송신되는 정보의 오류와 흐름 관리 -> 안전한 정보 전달
+- 네트워크 계층: 목적지까지 가장 안전하고 빠르게 전달 ex) IP
+- 전송 계층: 전송이 유효한지 확인하고 실패한 패킷은 다시 보냄 ex) TCP UDP
+- 세션 계층: 포트 연결이 유효한지 확인 ex) SSH
+- 표현 계층: 입출력되는 데이터를 하나의 표현 형태 ex) JPEG
+- 응용 계층: 사용자가 네트워크에 접근 ex) HTTP
+
+### TCP/IP
+- IP: 데이터 조직인 패킷을 최대한 빨리 목적지로 보내는 것
+- TCP: IP 보다는 느리지만 꼼꼼한 방식
+- 4계층
+    - 네트워크 계층(1,2)
+    - 인터넷 계층(3)
+    - 전송 계층(4)
+    - 응용 계층(5,6,7)
